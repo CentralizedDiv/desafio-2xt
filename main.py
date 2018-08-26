@@ -63,8 +63,8 @@ for departureAirport in airports:
             }
             #haversine
             distance = round(getDistanceByLatLong(departureLatlong, arrivalLatlong))
-
             
+            #loop into flight options, searching the cheapest one
             cheapestPrice = None
             cheapestAircraft = None
             for flight in flightSearch.options:
