@@ -19,6 +19,7 @@ def doGetRequest(url, auth, name):
     response = requests.get(url, auth=auth)
     if response.status_code == 200:
         jsonResponse = response.text
+        #fixes tuple's field name problem
         jsonResponse = jsonResponse.replace('from', 'fromAirport')
         return json2obj(jsonResponse)
     else:
@@ -32,6 +33,13 @@ def buildSearchURL(departure, arrival, date):
 #use Haversine to calculate distance between two airports
 def getDistanceByLatLong(departure, arrival):
     return haversine.distance(departure, arrival)    
+
+#subtract dates, return difference in hours
+def subtractDate(date1, date2):
+    date2 = datetime.strptime(date2, '%Y-%m-%dT%H:%M:%S')
+    date1 = datetime.strptime(date1, '%Y-%m-%dT%H:%M:%S')
+    diff = date2 - date1
+    return (diff.total_seconds() / 3600)
 
 
 #json with all airport data
@@ -53,8 +61,33 @@ for departureAirport in airports:
                 'lat': departureAirport.lat,
                 'lon': departureAirport.lon,
             }
-
+            #haversine
             distance = round(getDistanceByLatLong(departureLatlong, arrivalLatlong))
+
+            
+            cheapestPrice = None
+            cheapestAircraft = None
+            for flight in flightSearch.options:
+                #speed in km/hour
+                hoursOfFlight = subtractDate(flight.departure_time, flight.arrival_time)
+                flightSpeed = distance / hoursOfFlight
+
+                #price
+                price = flight.fare_price
+                pricePerKm = price / distance
+
+                cheapestPrice = price if (cheapestPrice == None or price < cheapestPrice) else cheapestPrice
+                cheapestAircraft = flight.aircraft if (cheapestPrice == price) else cheapestAircraft
+
+            print(departureAirport.iata + ' -> ' + arrivalAirport.iata + ' cheapest price: ' + str(cheapestPrice))
+
+                
+                
+                
+
+
+
+
 
 
 
