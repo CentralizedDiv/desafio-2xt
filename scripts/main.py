@@ -4,6 +4,7 @@ from datetime import timedelta, datetime
 from collections import namedtuple
 import haversine
 
+#Database
 database = PostgresqlDatabase('desafio_2xt', user='postgres', password='admin')
 class BaseModel(Model):
     class Meta:
@@ -42,6 +43,7 @@ class Flight(BaseModel):
     flightspeed = FloatField()
 
 database.create_tables([Airport, Aircraft, Trip, Flight])
+#End database
 
 airportsURL = 'http://stub.2xt.com.br/air/airports/oKexeaxSLvOqwGGq9DiDKEKaEQMmgAv3'
 searchURL = 'http://stub.2xt.com.br/air/search/oKexeaxSLvOqwGGq9DiDKEKaEQMmgAv3'

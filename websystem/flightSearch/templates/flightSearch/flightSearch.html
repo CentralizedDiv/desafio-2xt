@@ -1,0 +1,81 @@
+{% extends "flightSearch/template.html" %}
+
+{% block content %}
+	<div class="container-fluid">
+        <div class="row">
+            <center>
+                <h2>Opções de vôos</h2>
+            </center>
+        </div>
+        <div class="row">
+            <form class="form-inline">
+                <div class="form-group mb-5 departure-group">
+                    <label for="departure">Aeroporto de Saída</label>
+                    <input type="text" class="form-control-plaintext departure" id="departure" placeholder="Belo Horizonte">
+                    <input type="hidden" id="hidden-field">
+                </div>
+                <div class="form-group mb-5 arrival-group">
+                    <label for="arrival">Aeroporto de Chegada</label>
+                    <input type="text" class="form-control-plaintext arrival" id="arrival" placeholder="Maceió">
+                    <input type="hidden" id="hidden-field">
+                </div>
+                <div class="form-group mb-5 date-group">
+                    <label for="date">Data de Saída</label>
+                    <input type="date" id="date">
+                </div>
+                <a type="" class="btn btn-primary mb-2">Buscar</a>
+            </form>
+        </div>
+        <br />
+        <hr />
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">Opções</div>
+                <table class="table">
+                    <thead>
+                        <th>Hora de Saída</th>
+                        <th>Hora de Chegada</th>
+                        <th>Preço</th>
+                        <th>Aeronave</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>00:50</td>
+                            <td>03:25</td>
+                            <td>R$ 250,00</td>
+                            <td>GRANDONA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+    <script>
+    const myData = [{
+        "id": 1,
+        "name": 'Item 1',
+        "ignore": false
+      },{
+        "id": 2,
+        "name": 'Item 2',
+        "ignore": false
+      },{
+        "id": 3,
+        "name": 'Item 3',
+        "ignore": false
+      }
+    ]
+    $('.departure').autocomplete({
+        nameProperty: 'name',
+        valueField: '#hidden-field',
+        dataSource: myData
+    });
+    $('.arrival').autocomplete({
+        nameProperty: 'name',
+        valueField: '#hidden-field',
+        dataSource: myData
+    });
+    </script>
+{% endblock %}

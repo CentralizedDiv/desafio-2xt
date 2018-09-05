@@ -1,0 +1,32 @@
+a {
+    color:#000 !important;
+}
+li.active > a {
+    background-color: #000 !important;
+    color:#fff !important;
+}
+.btn.btn-primary {
+    background-color: #000 !important;  
+    border:none !important;
+    width: 100%;
+    color:#fff !important
+}
+.departure-group {
+    width: 50%;
+    float: left;
+    padding: 10px
+}
+.arrival-group {
+    width: 50%;
+    float: right;
+    padding: 10px
+}
+.date-group {
+    padding: 10px;
+}
+.date-group > input {
+    width:  100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
